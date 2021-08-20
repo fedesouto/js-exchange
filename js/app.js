@@ -1,10 +1,10 @@
 class Moneda{
     
-    constructor(id, nombre, cotizacion, comision){
+    constructor(id, nombre, cotizacion, comi){
         this.id = id;
         this.nombre = nombre;
         this.cotizacion = cotizacion;
-        this.comision = comision;
+        this.comi = comi;
     }
     //Calcula el subtotal sin comision
     cotizar(monto){
@@ -13,26 +13,31 @@ class Moneda{
     }
     //Calcula la comision sobre el total
     calcularComision(total){
-        let comision = total * this.comision;
+        let comision = total * (this.comi / 100);
         return comision;
     }
-    //Muestra los calculos en pantalla
-    mostrarEnPantalla(){
-        document.write(`
-            <main class="container-fluid py-4">
-            <div class="container text-center p-5 bg-light border rounded-4">
-            <h1 class="display-5 fw-normal">Comprá divisas y criptomonedas.</h1>
-            <p class="lead fw-normal">En JS Exchange, no tenés que moverte de tu casa para conseguir la mejor comisión del mercado.</p>
-            <div class="container mt-5">
-                <div>
-                    <h2>${mont} ${this.nombre} son AR$${total}.</h2>
-                    <p>Debe sumarle una comisión de AR$${comision}.</p>
-                </div>
+    
+}
+
+class Operacion{
+    constructor(moneda, monto, total, comision){
+        this.moneda = moneda;
+        this.monto = monto;
+        this.total = total;
+        this.comision = comision;
+    }
+    mostrarResultado() {
+        resultDiv.innerHTML = `
+        <div class="container mt-5 text-white">
+            <div>
+                <h2>${this.monto} ${this.moneda.nombre} son AR$${this.total}.</h2>
+                <p>Debe sumarle una comisión de AR$${this.comision}.</p>
+            </div>
             <div class="container pt-5">
-                <button class="btn btn-outline-primary btn-lg">Comprar</button>
+                <button class="btn btn-outline-light btn-lg">Comprar</button>
             </div>
-            </div>
-            </main>`);
+        </div>`
+        resultDiv.scrollIntoView();
     }
 }
 
@@ -40,21 +45,16 @@ class Moneda{
 const monedas = [];
 
 
-monedas.push(new Moneda("dolares", "Dolares", 168, 0.01));
-monedas.push(new Moneda("euros", "Euros", 197, 0.012));
-monedas.push(new Moneda("reales", "Reales", 32, 0.015));
+monedas.push(new Moneda("dolares", "Dolares", 168, 1));
+monedas.push(new Moneda("euros", "Euros", 197, 1.2));
+monedas.push(new Moneda("reales", "Reales", 32, 1.5));
+monedas.push(new Moneda("pesosUruguayos", "Pesos Uruguayos", 2.25, 1.5));
+monedas.push(new Moneda("pesosChilenos", "Pesos Chilenos", 785.5, 1.5));
+monedas.push(new Moneda("guaranies", "Guaranies", 6971, 1.5));
+monedas.push(new Moneda("pesosMexicanos", "Pesos Mexicanos", 20.43, 1.5));
 
 console.log(monedas);
 
-
-
-//Input del usuario (moneda)
-const elegirMoneda = () => {
-    moneda = prompt("Ingrese la moneda que desea comprar (DOLARES, EUROS o REALES)").toLowerCase()
-    while(moneda !== "dolares" && moneda !== "euros" && moneda !== "reales") {
-        moneda = prompt("Ingrese una moneda válida (DOLARES, EUROS o REALES)").toLowerCase()}
-    return moneda;   
-}
 
 //Input del usuario (monto a comprar)
 const elegirMonto = () => {
@@ -65,16 +65,46 @@ const elegirMonto = () => {
     return monto;
 }
 
-const mone = elegirMoneda();
-const mont = elegirMonto();
-const seleccionado = monedas.find(elemento => elemento.id === mone);
 
-const total = seleccionado.cotizar(mont);
-const comision = seleccionado.calcularComision(total);
-seleccionado.mostrarEnPantalla();
+const tablaMonedas = document.querySelector('#tabla__monedas')
+
+for (const moneda of monedas) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `  
+        <th scope="row">${moneda.nombre}</th>
+        <td>ARS ${moneda.cotizacion}</td>
+        <td>${moneda.comi} %</td>`;
+    tablaMonedas.appendChild(tr)
+}
+
+const selectMoneda = document.querySelector('#selectMone')
+
+for (const moneda of monedas) {
+    const opt = document.createElement('option');
+    opt.setAttribute('value', moneda.id);
+    opt.innerHTML = moneda.nombre;
+    selectMoneda.appendChild(opt);
+    
+}
+
+const form = document.querySelector('#inputCalculadora');
+const resultDiv = document.querySelector('#result');
 
 
 
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const mone = form.elements[0].value;
+    const mont = elegirMonto();
+    const seleccionado = monedas.find(elemento => elemento.id === mone);
+    const total = seleccionado.cotizar(mont);
+    const comision = seleccionado.calcularComision(total);
+
+    const operacion = new Operacion(seleccionado, mont, total, comision);
+    operacion.mostrarResultado();
+
+})
 
 
 
