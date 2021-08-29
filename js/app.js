@@ -89,20 +89,33 @@ for (const moneda of monedas) {
 
 const form = document.querySelector('#inputCalculadora');
 const resultDiv = document.querySelector('#result');
-
+const inputMonto = document.querySelector('#inputMonto');
+const divMontoInvalido = document.querySelector('#montoInvalido');
 
 
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    let mont = form.elements[1].value;
+    if(mont !== "" && mont !== '0'){
+    mont = parseInt(mont);
     const mone = form.elements[0].value;
-    const mont = elegirMonto();
     const seleccionado = monedas.find(elemento => elemento.id === mone);
     const total = seleccionado.cotizar(mont);
     const comision = seleccionado.calcularComision(total);
 
     const operacion = new Operacion(seleccionado, mont, total, comision);
     operacion.mostrarResultado();
+
+    inputMonto.classList.remove('is-invalid');
+    divMontoInvalido.style.display = 'none';
+    }
+    else {
+        inputMonto.classList.add('is-invalid');
+        divMontoInvalido.style.display = 'block';
+    }
+    
 
 })
 

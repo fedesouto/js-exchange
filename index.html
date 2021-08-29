@@ -74,13 +74,14 @@
             <select id="selectMone" class="form-select">
             </select>
           </div>
-          <!-- <div class="container form_element">
+          <div class="container form_element">
             <label for="inputMonto" class="form-label text-white">Ingrese el monto:</label>
             <div class="input-group">
               <span class="input-group-text">$</span>
-              <input type="text" id="inputMonto" class="form-control">
+              <input type="number" id="inputMonto" class="form-control">
             </div>
-          </div> -->
+            <div class="invalid-feedback" id="montoInvalido">Ingrese un monto válido.</div>
+          </div>
           <div class="container py-4">
             <button class="btn btn-outline-light btn-lg" type="submit">Cotizar</button>
           </div>
