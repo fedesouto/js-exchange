@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .logo {
@@ -29,6 +30,7 @@
 }
 #hero {
     min-height: 80vh;
+
 }
 #cotizaciones {
     padding-top: 10vh;
