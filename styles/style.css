@@ -42,6 +42,34 @@
 .form_element {
     padding-top: 25px;
 }
+.crypto-card {
+    width: 300px;
+    border: none;
+    padding: 25px;
+}
+.card-img-top {
+    max-width: 75%;
+    height: auto;
+    margin: auto;
+}
+#crypto-catalogue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#cotizadorWrapper {
+    display: none;
+}
+#cotizadorCrypto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#inputCrypto, #inputFiat {
+    margin: 25px 0;
+}
+
 @keyframes latido {
     0% {transform: scale(1);}
     50% {transform: scale(1.2);}

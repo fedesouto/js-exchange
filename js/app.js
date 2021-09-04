@@ -44,6 +44,7 @@ class Operacion{
     }
 }
 
+
 //Declaro array de monedas
 const monedas = [];
 
@@ -55,6 +56,7 @@ monedas.push(new Moneda("reales", "Reales", 32, 1.5));
 monedas.push(new Moneda("pesosUruguayos", "Pesos Uruguayos", 2.25, 1.5));
 monedas.push(new Moneda("pesosChilenos", "Pesos Chilenos", 0.13, 1.5));
 monedas.push(new Moneda("pesosMexicanos", "Pesos Mexicanos", 0.21, 1.5));
+
 
 const tablaMonedas = document.querySelector('#tabla__monedas')
 
