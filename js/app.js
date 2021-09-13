@@ -40,7 +40,7 @@ class Operacion{
                 <button class="btn btn-outline-light btn-lg">Comprar</button>
             </div>
         </div>`
-        resultDiv.scrollIntoView();
+        resultDiv.scrollIntoView({behavior: 'smooth'});
     }
 }
 

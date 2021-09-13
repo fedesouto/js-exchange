@@ -1,23 +1,20 @@
-// Boton barra de navegación
-document.addEventListener('DOMContentLoaded', () => {
+// Barra de navegación Mobile
 
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-toggler'), 0);
-  
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-  
-      // Add a click event on each of them
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-  
-          // Get the target from the "data-target" attribute
-          const $target = document.getElementById("navbarNavDropdown");
-  
-          $target.classList.toggle('show');
-  
-        });
-      });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const burger = document.querySelector('.navbar-toggler');
+  burger.addEventListener('click', () =>{
+    $('#navbarNavDropdown').slideToggle();
+  })
+    
+  const links = document.querySelectorAll('.nav-link')
+
+  for(let link of links){
+    link.addEventListener('click', () => {
+      $('#navbarNavDropdown').hide();
+    })
     }
+  }
+);
+
   
-  });

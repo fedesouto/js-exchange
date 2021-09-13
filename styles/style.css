@@ -43,14 +43,19 @@
     padding-top: 25px;
 }
 .crypto-card {
-    width: 300px;
+    width: 200px;
+    min-height: 350px;
     border: none;
     padding: 25px;
+    justify-content: space-between;
 }
 .card-img-top {
     max-width: 75%;
     height: auto;
     margin: auto;
+}
+.card-body {
+    flex-grow: 0;
 }
 #crypto-catalogue {
     display: flex;
