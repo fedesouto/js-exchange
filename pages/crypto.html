@@ -34,15 +34,41 @@
             <li class="nav-item">
                 <a class="nav-link active" href="crypto.html">Criptomonedas</a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="../pages/login.html">Mi Cuenta</a>
-            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/account.html" id="accountLink">Mi Cuenta</a>
+            </li>
             </ul>
         </div>
         </div>
     </nav>
 
     <main class="py-4">
+        <!-- Modal Login -->
+        <div class="modal" tabindex="-1" id="signInModal">
+            <div class="container d-flex mt-5 text-center" id="modal-content">
+            <div id="closeIcon"><i class="lni lni-close"></i></div>
+            <form class="form-signin col col-md-6" id="signInForm">
+                <h2 class="h2 mb-5 font-weight-normal">Iniciar sesión</h2>
+                <label for="inputEmail" class="d-none">Email</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <label for="inputPassword" class="d-none">Contraseña</label>
+                <input type="password" id="inputPassword" class="form-control mt-3" placeholder="Contraseña" required>
+                <button class="btn btn-lg btn-dark btn-block mt-5" type="submit">Sign in</button>
+            </form>
+            <form class="form col col-md-6" id="signUpForm">
+                <h2 class="h2 font-weight-normal">Registrarse</h2>
+                <label for="registerNombre" class="form-label pt-2">Nombre</label>
+                <input type="text" class="form-control form-element" id="registerNombre" placeholder="Nombre" required autofocus>
+                <label for="registerEmail" class="form-label pt-2">Email</label>
+                <input type="email" class="form-control" id="registerEmail" placeholder="Email" required>
+                <label for="registerPassword" class="form-label pt-2">Contraseña</label>
+                <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" required>
+                <button class="btn btn-lg btn-dark btn-block mt-5" type="submit">Registrarse</button>
+            </form>
+            <a href="#" class="pt-4" id="changeToSignUp">Registrarse/Ingresar</a>
+            </div>
+        </div>
+        <!-- Main Content -->
         <div class="container" id="crypto-catalogue">
         </div>
         <div id="cotizadorWrapper">
@@ -74,6 +100,7 @@
     
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../js/firebase.js" type="module"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/cryptos.js"></script>
 </body>

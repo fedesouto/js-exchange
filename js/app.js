@@ -36,9 +36,7 @@ class Operacion{
                 <p>Debe sumarle una comisión de AR$${this.comision}.</p>
                 <p><b>El total a pagar es AR$${this.total}.</b></p>
             </div>
-            <div class="container pt-5">
-                <button class="btn btn-outline-light btn-lg">Comprar</button>
-            </div>
+            
         </div>`
         resultDiv.scrollIntoView({behavior: 'smooth'});
     }
@@ -100,12 +98,10 @@ form.addEventListener('submit', (event) => {
 
     const operacion = new Operacion(seleccionado, mont, subtotal, comision, total);
     operacion.mostrarResultado();
+    localStorage.setItem('operacionPendiente', JSON.stringify(operacion))
 
     inputMonto.classList.remove('is-invalid');
     divMontoInvalido.style.display = 'none';
-
-    const bkupOperacion = JSON.stringify(operacion);
-    sessionStorage.setItem('operacion', bkupOperacion);
     }
     else {
         inputMonto.classList.add('is-invalid');
@@ -114,5 +110,7 @@ form.addEventListener('submit', (event) => {
     
     
 })
+
+
 
 

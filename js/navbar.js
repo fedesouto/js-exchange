@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
       $('#navbarNavDropdown').hide();
     })
     }
+
+  
   }
+
+  
 );
 
   
