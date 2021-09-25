@@ -11,10 +11,14 @@
 }
 .navbar-right {
     justify-content: flex-end;
-    margin-right: 100px;
     font-weight: bold;
 }
-
+#accountSubMenu li {
+    padding-left: 5%;
+}
+main{
+    min-height: 75vh;
+}
 .modal {
     background-color: rgba(0, 0, 0, 0.7);
     padding-top: 50px;
@@ -46,6 +50,7 @@
     font-size: 18px;
     border-radius: .2rem;
     cursor:pointer;
+    color: whitesmoke;
 }
 .error {
     color: red;
@@ -74,6 +79,9 @@
 }
 #result, #calculadora {
     padding: 15vh 0;
+}
+#comprarDivisa{
+    display: none;
 }
 .form_element {
     padding-top: 25px;
@@ -111,6 +119,24 @@
     margin: 25px 0;
 }
 
+#badgeNombre {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(89, 168, 15);
+}
+#tablaHistorial {
+    display: none;
+}
+
+
 @keyframes latido {
     0% {transform: scale(1);}
     50% {transform: scale(1.2);}
@@ -120,5 +146,11 @@
 @media only screen and (min-width:992px) {
     #hero .img-fluid {
         max-width: 60%;
+    }
+    .navbar-right {
+        margin-right: 100px;
+    }
+    #accountSubMenu {
+        margin-top: 15px;
     }
 }

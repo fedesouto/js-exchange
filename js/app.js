@@ -39,6 +39,7 @@ class Operacion{
             
         </div>`
         resultDiv.scrollIntoView({behavior: 'smooth'});
+        $('#comprarDivisa').show()
     }
 }
 
@@ -111,6 +112,16 @@ form.addEventListener('submit', (event) => {
     
 })
 
+const comprar = document.querySelector('#comprarDivisa')
+comprar.addEventListener('click', guardarOperacion)
 
-
+function guardarOperacion(){
+    let allOpers = JSON.parse(localStorage.getItem('operaciones'))
+    let newOper = JSON.parse(localStorage.getItem('operacionPendiente'))
+    allOpers.push(newOper)
+    localStorage.setItem('operaciones', JSON.stringify(allOpers))
+    console.log(allOpers)
+    
+    
+}
 

@@ -29,14 +29,24 @@
                 <a class="nav-link" aria-current="page" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../index.html#cotizaciones">Divisas</a>
+                <a class="nav-link" id="divisasLink" href="../index.html#cotizaciones">Divisas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="crypto.html">Criptomonedas</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../pages/account.html" id="accountLink">Mi Cuenta</a>
-            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" aria-expanded="false">
+                  Mi cuenta
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" id="accountSubMenu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="account.html" id="accountLink">Mi Cuenta</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../index.html" id="logout">Log-Out</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
         </div>
         </div>
@@ -46,9 +56,13 @@
         <!-- Modal Login -->
         <div class="modal" tabindex="-1" id="signInModal">
             <div class="container d-flex mt-5 text-center" id="modal-content">
-            <div id="closeIcon"><i class="lni lni-close"></i></div>
+            <div id="closeIcon"><button type="button" class="btn-close btn-close-white" aria-label="Close"></button></div>
             <form class="form-signin col col-md-6" id="signInForm">
                 <h2 class="h2 mb-5 font-weight-normal">Iniciar sesión</h2>
+                <div id="messagePlaceholder">
+                    <div id="alertWrapper"></div>
+                    <p class="error" id="signInError"></p>
+                  </div>
                 <label for="inputEmail" class="d-none">Email</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
                 <label for="inputPassword" class="d-none">Contraseña</label>

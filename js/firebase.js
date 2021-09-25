@@ -57,7 +57,8 @@ signInForm.addEventListener('submit', (evt) => {
 
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-        const user = userCredential.user;getUserInfo(db, user.uid)
+        const user = userCredential.user;
+        getUserInfo(db, user.uid)
         .then(user => {
             for(let index in user){
                localStorage.setItem(index, user[index])
@@ -94,7 +95,13 @@ signUpForm.addEventListener('submit', (evt) => {
                 operaciones: []
             }
             )
-            $('.modal').fadeOut()
+            getAuth().signOut().then(()=>console.log('sign out'))
+            $('#signUpForm').toggle()
+            $('#signInForm').toggle()
+            $('#alertWrapper').html(`
+            <div class="alert alert-success" role="alert">
+                Gracias por registrarte! Inicia sesión para continuar.
+            </div>`)
         })
         .catch((err) => {
             $('#signUpError').text(err.message)
@@ -104,32 +111,32 @@ signUpForm.addEventListener('submit', (evt) => {
 })
 
 //Logout
-logout.addEventListener('click', (evt)=>{
+logout.addEventListener('click', (evt) =>{
     evt.preventDefault()
     getAuth().signOut().then(()=>console.log('sign out'))
+    guardarOperacion()
     localStorage.clear()
+    
     
         
 })
 
-onAuthStateChanged(auth, (user) => {
-    if(user){
-        console.log('logged in');
-    }
-    else {
-        console.log('logged out');
-    }
-})
-
-//Operaciones en BBDD NO FUNCIONA
+//Guarda operaciones en BBDD
 
  function guardarOperacion(){
-    let allOpers = localStorage.getItem('operaciones')
-    console.log(allOpers)
-    allOpers.push(newOper)
-    localStorage.setItem('operaciones', allOpers)
-    console.log('ok')
+    const uid = localStorage.getItem('id')
+    const localNombre = localStorage.getItem('nombre')
+    const localFunds = localStorage.getItem('funds')
+    const localOper = JSON.parse(localStorage.getItem('operaciones'))
+    console.log(localOper)
+            setDoc(doc(db, 'users', uid), {
+                id : uid,
+                nombre : localNombre,
+                funds : localFunds,
+                operaciones: localOper
+            })
+            
+    
+    
 }
 
-const comprar = document.querySelector('#comprarDivisa')
-comprar.addEventListener('click', guardarOperacion())
