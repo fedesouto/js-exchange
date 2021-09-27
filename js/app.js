@@ -113,7 +113,14 @@ form.addEventListener('submit', (event) => {
 })
 
 const comprar = document.querySelector('#comprarDivisa')
-comprar.addEventListener('click', guardarOperacion)
+comprar.addEventListener('click', () => {
+    swal({
+        title: "¡Gracias!",
+        text: "¡Tu operación fue realizada con éxito!",
+        icon: "success",
+        button: "Continuar"
+      });
+    guardarOperacion()})
 
 function guardarOperacion(){
     let allOpers = JSON.parse(localStorage.getItem('operaciones'))
@@ -124,4 +131,6 @@ function guardarOperacion(){
     
     
 }
+
+
 

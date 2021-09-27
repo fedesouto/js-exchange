@@ -32,14 +32,6 @@ const firebaseConfig = {
   appId: "1:886027376912:web:2976d2277da6a5c25bad95"
 };
 
-async function getUserInfo(db, id){
-    const usersCollection = collection(db, 'users');
-    const usersSnapshot = await getDocs(usersCollection);
-    const usersData = await usersSnapshot.docs.map(doc => doc.data())
-    const userData = await usersData.find(user => user.id === id)
-    return userData; 
-}
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -48,6 +40,51 @@ const db = getFirestore();
 const signInForm = document.querySelector('#signInForm');
 const signUpForm = document.querySelector('#signUpForm');
 const logout = document.querySelector('#logout')
+
+//Baja info de BBDD
+
+async function getUserInfo(db, id){
+    const usersCollection = collection(db, 'users');
+    const usersSnapshot = await getDocs(usersCollection);
+    const usersData = await usersSnapshot.docs.map(doc => doc.data())
+    const userData = await usersData.find(user => user.id === id)
+    return userData; 
+}
+
+//Guarda info en BBDD
+
+async function sincronizar(callback){
+    const uid = localStorage.getItem('id')
+    const localNombre = localStorage.getItem('nombre')
+    const localFunds = localStorage.getItem('funds')
+    const localOper = JSON.parse(localStorage.getItem('operaciones'))
+    console.log(localOper)
+
+    await setDoc(doc(db, 'users', uid), {
+        id : uid,
+        nombre : localNombre,
+        funds : localFunds,
+        operaciones: localOper
+    })
+    callback();   
+}
+
+// SignOut function
+
+async function signOut(){
+    await getAuth().signOut().then(()=>console.log('sign out'))
+    localStorage.clear()
+    reload();
+}
+
+function reload(){
+    if(location.pathname === '/index.html'){
+        location.reload();
+    }else{
+        location.pathname = '/index.html'
+    }
+}
+
 
 //Login
 signInForm.addEventListener('submit', (evt) => {
@@ -65,8 +102,9 @@ signInForm.addEventListener('submit', (evt) => {
             }
             localStorage.setItem('operaciones', JSON.stringify(user.operaciones))
             })
-            $('.modal').fadeOut()
 
+            $('.modal').fadeOut()
+            
     })
     .catch(err => {
         console.error(err)
@@ -110,33 +148,9 @@ signUpForm.addEventListener('submit', (evt) => {
             })
 })
 
-//Logout
+//Logout event
 logout.addEventListener('click', (evt) =>{
     evt.preventDefault()
-    getAuth().signOut().then(()=>console.log('sign out'))
-    guardarOperacion()
-    localStorage.clear()
-    
-    
-        
+    sincronizar(signOut)
 })
-
-//Guarda operaciones en BBDD
-
- function guardarOperacion(){
-    const uid = localStorage.getItem('id')
-    const localNombre = localStorage.getItem('nombre')
-    const localFunds = localStorage.getItem('funds')
-    const localOper = JSON.parse(localStorage.getItem('operaciones'))
-    console.log(localOper)
-            setDoc(doc(db, 'users', uid), {
-                id : uid,
-                nombre : localNombre,
-                funds : localFunds,
-                operaciones: localOper
-            })
-            
-    
-    
-}
 

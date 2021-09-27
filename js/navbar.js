@@ -20,4 +20,9 @@ const accountDropdown = document.getElementById('accountDropdown')
 accountDropdown.addEventListener('click', () => {
   $('#accountSubMenu').slideToggle();
 })
+
+$(document).on('click', (evt) => {
+  if(evt.target != accountDropdown){
+  $('#accountSubMenu').slideUp();}
+})
   
