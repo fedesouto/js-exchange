@@ -78,11 +78,7 @@ async function signOut(){
 }
 
 function reload(){
-    if(location.pathname === '/index.html'){
-        location.reload();
-    }else{
-        location.pathname = '/index.html'
-    }
+    document.querySelector('.navbar-brand').click()
 }
 
 
